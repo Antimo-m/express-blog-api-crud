@@ -1,42 +1,28 @@
 import express from "express"
-import napoli from "../Napoli.js"
 
+import postController from "../controller/postController.js"
 const router = express.Router();
 
 //ora andremo a creare le nostre rotte CRUD
 
 //index
-router.get(`/`, (req, res) => {
-    const risultato = {
-        count : napoli.length,
-        valore: napoli
-    }
-    res.json(risultato)
-})
+router.get(`/`, postController.index)
 
 //show
-router.get (`/:id`, (req, res) => {
+router.get (`/:id`, postController.show)
 
-})
+
 //store
-router.post(`/`, (req,res) => {
-   res.send("post creato")
-})
+router.post(`/`, postController.store)
 
 //update
-router.put(`/:id`, (req, res) => {
-    const id = req.params.id;
-    res.send(`il post con id ${id} è stato aggiornato!`)
-})
+router.put(`/:id`, postController.update)
 
 //modify
-router.patch(`/:id`, (req, res) => {
-    const id = req.params.id;
-    res.send(`il post con id ${id} è stato modificato!`)
-})
+router.patch(`/:id`, postController.modify)
+
+
 //destroy
-router.delete(`/:id`, (req, res) => {
-    const id = req.params.id
-    res.send(`il post con id ${id} è stato cancellato!`)
-})
+router.delete(`/:id`, postController.destroy)
+
 export default router
