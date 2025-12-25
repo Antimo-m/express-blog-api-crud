@@ -56,14 +56,25 @@ const update = (req, res) => {
 
 //Modify
 const modify = (req,res) => {
- const id = req.params.id;
-res.json({message: `il post con id ${id} è stato modificato!`})
+ const id = parseInt(req.params.id);
+const post = napoli.find(post => post.id === id) //troviamo il post corridpsondente all'id
+const ModifyPost = {...post, ...req.body}//creiamo un oggetto dove combinato i dati del post originale con quelli ricevuti nel body
+
+    const index = napoli.findIndex(post => post.id === id); //Troviamo l’indice del post nell’array e lo sostituiamo con l’oggetto aggiornato
+napoli[index] = ModifyPost
+
+res.status(200).json(ModifyPost)
+
 }
 
 
 const destroy = (req,res) => {
-    const id = req.params.id
-    res.json({message: `il post con id ${id} è stato cancellato!`})
+    const id = parseInt(req.params.id);
+    const postIndex = napoli.findIndex(post => post.id === id);
+
+    napoli.splice(postIndex, 1);
+    res.status(200).json({message: "post con id ${id} eliminato"})
+
 }
 
 export default { index, show, store, update, modify, destroy}
