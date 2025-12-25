@@ -42,7 +42,14 @@ const store = (req, res) => {
 //Update
 const update = (req, res) => {
     const id = parseInt(req.params.id);
-    
+    const postIndex = napoli.findIndex(post => post.id === id)//cerchiamo l'indice del post corrispondente all'id passato nell'url
+
+    napoli[postIndex] = {
+        id, 
+        ...req.body
+    } // sovrasciviamo il post trovato con i dati passati nel body mantendo lo stesso id
+
+    res.json(napoli[postIndex]) //mostriamo il post aggiornato
     
 }
 
