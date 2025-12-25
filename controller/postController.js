@@ -22,16 +22,28 @@ const show = (req, res) => {
     }
 }
 
+
 //Store
 const store = (req, res) => {
-    res.json({ message: `Il post è stato Creato` })
+    const newid = napoli[napoli.length -1].id +1;// andiamo a generare l'id manualmente
+
+    
+    const newPost = {
+        id:newid,
+        ...req.body
+    }; //creiamo un nuovo oggetto passandogli l'id e copiando i dati dal request
+
+    napoli.push(newPost)//pushiamo il tutto nel nostro array napoli, 
+    console.log(req.body)
+    res.status(201).json(newPost)//mostriamo la rispsota
 }
 
 
 //Update
 const update = (req, res) => {
-    const id = req.params.id;
-    res.json({message : `il post con id ${id} è stato aggiornato!`})
+    const id = parseInt(req.params.id);
+    
+    
 }
 
 
