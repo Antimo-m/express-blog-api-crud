@@ -2,7 +2,7 @@ import napoli from "../Napoli.js"
 
 //Index
 const index = (req, res) => {
-    const risultato = {
+    const risultato= {
         count: napoli.length,
         valore: napoli
     }
